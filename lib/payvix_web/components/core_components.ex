@@ -220,8 +220,12 @@ defmodule PayvixWeb.CoreComponents do
       <.button>Send!</.button>
       <.button phx-click="go" class="ml-2">Send!</.button>
   """
+  attr :class, :string,
+    default: "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3
+  text-sm font-semibold leading-6 text-white active:text-white/80"
+
   attr :type, :string, default: nil
-  attr :class, :string, default: nil
+
   attr :rest, :global, include: ~w(disabled form name value)
 
   slot :inner_block, required: true
@@ -231,8 +235,6 @@ defmodule PayvixWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
-        "text-sm font-semibold leading-6 text-white active:text-white/80",
         @class
       ]}
       {@rest}
@@ -281,6 +283,10 @@ defmodule PayvixWeb.CoreComponents do
   attr :field, Phoenix.HTML.FormField,
     doc: "a form field struct retrieved from the form, for example: @form[:email]"
 
+  attr :custom_class, :string,
+    default:
+      "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-4 sm:text-sm sm:leading-6 min-h-[2rem]"
+
   attr :errors, :list, default: []
   attr :checked, :boolean, doc: "the checked flag for checkbox inputs"
   attr :prompt, :string, default: nil, doc: "the prompt for select inputs"
@@ -318,7 +324,7 @@ defmodule PayvixWeb.CoreComponents do
           name={@name}
           value="true"
           checked={@checked}
-          class="rounded border-zinc-300 text-zinc-900 focus:ring-0"
+          class={@class}
           {@rest}
         />
         <%= @label %>
@@ -355,7 +361,7 @@ defmodule PayvixWeb.CoreComponents do
         id={@id}
         name={@name}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6 min-h-[6rem]",
+          @custom_class,
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
@@ -377,7 +383,7 @@ defmodule PayvixWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
+          @custom_class,
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
         ]}
@@ -391,12 +397,13 @@ defmodule PayvixWeb.CoreComponents do
   @doc """
   Renders a label.
   """
+  attr :class, :string, default: "block text-sm  leading-6 text-blue-800"
   attr :for, :string, default: nil
   slot :inner_block, required: true
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800">
+    <label for={@for} class={@class}>
       <%= render_slot(@inner_block) %>
     </label>
     """
@@ -446,7 +453,7 @@ defmodule PayvixWeb.CoreComponents do
 
   ## Examples
 
-      <.table id="users" rows={@users}>
+      <.table id="Accounts" rows={@Accounts}>
         <:col :let={user} label="id"><%= user.id %></:col>
         <:col :let={user} label="username"><%= user.username %></:col>
       </.table>

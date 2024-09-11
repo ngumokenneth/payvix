@@ -1,14 +1,15 @@
 defmodule PayvixWeb.User.CreateUserLive do
   use PayvixWeb, :live_view
 
-  alias Payvix.Users
+  # alias Payvix.Accounts.User
+  alias Payvix.Accounts
 
   def render(assigns) do
     ~H"""
     <h1 class="text-[2rem] font-bold">Create an Account</h1>
     <p class="text-[#343434] font-semibold">Begin creating invoices for free!</p>
-    <.simple_form for={@form} phx-change="validate" phx-submit="submit">
-      <.input field={@form[:name]} label="Name" />
+    <.simple_form for={@form} phx-change="validate" phx-submit="submit" id="user-registration-form">
+      <.input field={@form[:name]} label="Name" custom_class="w-full" />
       <.input field={@form[:username]} label="Username" />
       <.input field={@form[:email]} label="Email" />
       <.input field={@form[:password]} label="Password" />
@@ -29,28 +30,33 @@ defmodule PayvixWeb.User.CreateUserLive do
   end
 
   def handle_event("validate", %{"user_form" => user_params}, socket) do
-    changeset = Users.change_user(user_params)
-    form = to_form(changeset, as: "user_form")
-    {:noreply, assign(socket, :form, form)}
+    {:noreply, handle_validate(user_params, socket)}
   end
 
   def handle_event("submit", %{"user_form" => user_params}, socket) do
-    case Users.create_user(user_params) do
-      {:ok, changeset} ->
-        IO.inspect(changeset, label: "submit changeset ====")
+    {:noreply, handle_submit(user_params, socket)}
+  end
 
-        {:noreply,
-         socket
-         |> put_flash(:info, "User created successfully")
-         |> push_navigate(to: ~p"/")}
+  defp handle_validate(user_params, socket) do
+    changeset = user_params |> Accounts.change_user() |> Map.put(:action, :validate)
+    form = to_form(changeset, as: "user_form")
+    assign(socket, :form, form)
+  end
+
+  defp handle_submit(user_params, socket) do
+    case Accounts.create_user(user_params) do
+      {:ok, _user} ->
+        socket
+        |> put_flash(:info, "user created successfully")
+        |> push_navigate(to: ~p"/Accounts/login")
 
       {:error, changeset} ->
-        {:noreply, assign(socket, :form, to_form(changeset, as: "user_form"))}
+        assign(socket, :form, to_form(changeset, as: "user_form"))
     end
   end
 
   defp apply_action(:new, _params, socket) do
-    changeset = Users.change_user()
+    changeset = Accounts.change_user()
     form = to_form(changeset, as: "user_form")
     assign(socket, :form, form)
   end

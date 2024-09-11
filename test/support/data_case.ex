@@ -24,6 +24,7 @@ defmodule Payvix.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Payvix.DataCase
+      import Payvix.Factory
     end
   end
 

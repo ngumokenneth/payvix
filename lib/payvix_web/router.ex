@@ -20,10 +20,12 @@ defmodule PayvixWeb.Router do
     get "/", PageController, :home
   end
 
-  scope "/users", PayvixWeb do
+  scope "/Accounts", PayvixWeb do
     pipe_through :browser
 
-    live "/new", User.CreateUserLive, :new
+    live "/register", User.CreateUserLive, :new
+    live "/login", User.LoginUserLive
+    live "/avatar", User.AvatarLive
   end
 
   # Other scopes may use custom stacks.

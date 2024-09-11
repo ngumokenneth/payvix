@@ -28,6 +28,11 @@ defmodule PayvixWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import PayvixWeb.ConnCase
+      alias Payvix.UserFactory
+      import Phoenix.LiveViewTest
+      import Ecto.Query
+
+      alias Payvix.Repo
     end
   end
 
