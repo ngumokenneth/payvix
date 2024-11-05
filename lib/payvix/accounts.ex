@@ -124,8 +124,8 @@ defmodule Payvix.Accounts do
     if user, do: {:ok, user}, else: {:error, :invalid_credentials}
   end
 
-  defp maybe_login_user(user, %{"password" => password}) do
-    similar? = user.password == password
+  defp maybe_login_user(user, %{"email" => email}) do
+    similar? = user.email == email
     if similar?, do: {:ok, user}, else: {:error, :invalid_credentials}
   end
 end

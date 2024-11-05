@@ -1,0 +1,30 @@
+<div>
+  <%!-- mobile header --%>
+  <div class="bg-[#373B53] flex justify-between lg:hidden max-auto max-w-full">
+    <div class="bg-[#7C5DFA] w-20 h-[4.5rem] rounded-r-3xl relative flex items-center justify-center">
+      <img src={~p"/images/logo2.svg"} alt="" class=" h-[1.75rem] z-10" />
+      <div class="bg-[#9277FF] w-full h-10 rounded-br-3xl rounded-tl-3xl absolute bottom-0"></div>
+    </div>
+    <div class="flex items-center mr-3">
+      <img src={~p"/images/cresent.svg"} alt="" width="36" />
+      <div class=" w-1 bg-[#494E6E] mx-3 h-full"></div>
+      <div class="rounded-full h-10 w-10 bg-white"></div>
+    </div>
+  </div>
+
+  <%!-- desktop nav --%>
+  <div class="hidden lg:block">
+    <div class="bg-[#373B53] h-screen w-20 flex flex-col justify-between rounded-r-3xl">
+      <div class="bg-[#7C5DFA] w-20 h-[4.5rem] rounded-r-3xl relative flex items-center justify-center">
+        <img src={~p"/images/logo2.svg"} alt="" class=" h-[1.75rem] z-10" />
+        <div class="bg-[#9277FF] w-full h-10 rounded-br-3xl rounded-tl-3xl absolute bottom-0">
+        </div>
+      </div>
+      <div class="flex flex-col items-center mb-3">
+        <img src={~p"/images/cresent.svg"} alt="" width="36" />
+        <div class=" bg-[#494E6E] my-3 h-1 w-full"></div>
+        <div class="rounded-full h-10 w-10 bg-white"></div>
+      </div>
+    </div>
+  </div>
+</div>

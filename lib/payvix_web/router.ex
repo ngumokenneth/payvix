@@ -17,17 +17,23 @@ defmodule PayvixWeb.Router do
   scope "/", PayvixWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", IndexLive.Index
   end
 
-  scope "/Accounts", PayvixWeb do
+  scope "/users", PayvixWeb do
     pipe_through :browser
 
     live "/register", User.CreateUserLive, :new
     live "/login", User.LoginUserLive
     live "/avatar", User.AvatarLive
+    live "/show", User.ShowUsersLive
   end
 
+  scope "/invoices", PayvixWeb do
+    pipe_through :browser
+
+    live "/", Invoices.InvoicesLive
+  end
   # Other scopes may use custom stacks.
   # scope "/api", PayvixWeb do
   #   pipe_through :api

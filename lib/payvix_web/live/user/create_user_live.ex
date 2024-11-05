@@ -48,7 +48,7 @@ defmodule PayvixWeb.User.CreateUserLive do
       {:ok, _user} ->
         socket
         |> put_flash(:info, "user created successfully")
-        |> push_navigate(to: ~p"/Accounts/login")
+        |> push_navigate(to: ~p"/users/login")
 
       {:error, changeset} ->
         assign(socket, :form, to_form(changeset, as: "user_form"))

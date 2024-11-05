@@ -43,7 +43,7 @@ defmodule PayvixWeb.User.LoginUserLive do
 
   defp handle_submit(user_params, socket) do
     case Accounts.login_user(user_params) do
-      {:ok, _user} -> push_navigate(socket, to: ~p"/")
+      {:ok, _user} -> push_navigate(socket, to: ~p"/users/avatar")
       {:error, _not_found} -> put_flash(socket, :error, "Invalid credentials")
     end
   end
