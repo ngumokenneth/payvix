@@ -3,7 +3,7 @@ defmodule Payvix.Accounts.User do
 
   import Ecto.Changeset
 
-  @primary_key {:id, :binary_id, autogenerate: true}
+  @primary_key {:user_id, :binary_id, autogenerate: true}
   schema "users" do
     field :name, :string
     field :username, :string

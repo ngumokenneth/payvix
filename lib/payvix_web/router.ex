@@ -34,6 +34,7 @@ defmodule PayvixWeb.Router do
 
     live "/", Invoices.InvoicesLive
   end
+
   # Other scopes may use custom stacks.
   # scope "/api", PayvixWeb do
   #   pipe_through :api
