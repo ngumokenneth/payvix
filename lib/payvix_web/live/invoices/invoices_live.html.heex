@@ -1,9 +1,9 @@
-<div>
+<div class="h-full flex flex-col lg:flex-row">
   <%!-- mobile header --%>
   <div class="bg-[#373B53] flex justify-between lg:hidden max-auto max-w-full">
-    <div class="bg-[#7C5DFA] w-20 h-[4.5rem] rounded-r-3xl relative flex items-center justify-center">
+    <div class="bg-[#7C5DFA] w-16 h-16 rounded-r-xl relative flex items-center justify-center">
       <img src={~p"/images/logo2.svg"} alt="" class=" h-[1.75rem] z-10" />
-      <div class="bg-[#9277FF] w-full h-10 rounded-br-3xl rounded-tl-3xl absolute bottom-0"></div>
+      <div class="bg-[#9277FF] w-full h-8 rounded-br-xl rounded-tl-3xl absolute bottom-0"></div>
     </div>
     <div class="flex items-center mr-3">
       <img src={~p"/images/cresent.svg"} alt="" width="36" />
@@ -13,17 +13,54 @@
   </div>
 
   <%!-- desktop header --%>
-  <div class="hidden lg:block">
-    <div class="bg-[#373B53] h-screen w-[5%] flex flex-col justify-between rounded-r-3xl">
-      <div class="bg-[#7C5DFA] w-full h-[4.5rem] rounded-r-3xl relative flex items-center justify-center">
-        <img src={~p"/images/logo2.svg"} alt="" class=" h-[1.75rem] z-10" />
-        <div class="bg-[#9277FF] w-full h-10 rounded-br-3xl rounded-tl-3xl absolute bottom-0">
+
+  <%!-- <div>
+      <%= if @invoice_count == 0 do %>
+        <p>No invoice found</p>
+      <% else %>
+        <.table id="invoices" rows={@streams.invoices}>
+          <:col :let={invoice}><%= invoice.id %></:col>
+          <:col :let={invoice}><%= invoice.invoice_date %></:col>
+          <:col :let={user}><%= user.name %></:col>
+          <:col :let={invoice}><%= invoice.amount %></:col>
+          <:col :let={invoice}><%= invoice.status %></:col>
+        </.table>
+      <% end %>
+    </div> --%>
+  <%!-- Rendered when there are no invoices --%>
+
+  <div class="bg-blue-950 ">
+    <div class="hidden lg:block">
+      <div class="bg-[#373B53] h-screen w-16 flex flex-col justify-between rounded-r-3xl">
+        <div class="bg-[#7C5DFA] w-full h-[4.5rem] rounded-r-3xl relative flex items-center justify-center">
+          <img src={~p"/images/logo2.svg"} alt="" class="h-[1.75rem] z-10" />
+          <div class="bg-[#9277FF] w-full h-10 rounded-br-3xl rounded-tl-3xl absolute bottom-0">
+          </div>
+        </div>
+        <div class="flex flex-col items-center mb-3">
+          <img src={~p"/images/cresent.svg"} alt="" width="36" />
+          <div class=" bg-[#494E6E] my-3 h-1 w-full"></div>
+          <div class="rounded-full h-10 w-10 bg-white"></div>
         </div>
       </div>
-      <div class="flex flex-col items-center mb-3">
-        <img src={~p"/images/cresent.svg"} alt="" width="36" />
-        <div class=" bg-[#494E6E] my-3 h-1 w-full"></div>
-        <div class="rounded-full h-10 w-10 bg-white"></div>
+    </div>
+  </div>
+  <div class="w-full">
+    <div class="mx-auto max-w-2xl pt-10 flex justify-between items-center px-4">
+      <div>
+        <p class="font-bold text-2xl">Invoices</p>
+        <p class="text-[#888EB0]">No<span><%= Enum.count(@streams.invoices) %></span> invoices</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <form action="">
+          <span class="font-semibold text-2xl rounded-full p-4 border">Filter </span>
+        </form>
+        <button class="bg-[#9277FF] rounded-full flex items-center gap-3 p-3">
+          <div class=" bg-white h-8 w-8 rounded-full">
+            <span class="font-bold text-3xl text-[#9277FF] ">+</span>
+          </div>
+          <span class="font-bold text-xl text-white">New</span>
+        </button>
       </div>
     </div>
   </div>

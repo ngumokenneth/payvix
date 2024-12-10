@@ -9,6 +9,7 @@ defmodule Payvix.Invoices.Invoice do
   @valid_terms [1, 7, 14, 21, 30]
 
   @primary_key {:invoice_id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "invoices" do
     embeds_one(:bill_from, BillFrom, on_replace: :update)
     embeds_one(:bill_to, BillTo, on_replace: :update)

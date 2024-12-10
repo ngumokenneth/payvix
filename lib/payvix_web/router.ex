@@ -32,7 +32,7 @@ defmodule PayvixWeb.Router do
   scope "/invoices", PayvixWeb do
     pipe_through :browser
 
-    live "/", Invoices.InvoicesLive
+    live "/", Invoices.InvoicesLive, :index
   end
 
   # Other scopes may use custom stacks.
